@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="footer-brand">
           <span className="footer-logo">
             <img
-              src="../../public/logo.png"
+              src="../../logo.png"
               alt={business.name}
               width={480}
               height={150}

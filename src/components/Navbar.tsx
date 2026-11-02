@@ -82,7 +82,7 @@ export default function Navbar({ cartCount, cartOpen, onOpenCart }: NavbarProps)
         <div className="container header-inner">
           <a href="#inicio" className="logo" aria-label={`${business.name} · Inicio`}>
             <img
-              src="../../public/logo.png"
+              src="../../logo.png"
               alt=""
               width={480}
               height={150}
