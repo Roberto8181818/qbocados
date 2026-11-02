@@ -62,7 +62,9 @@ export default function Footer() {
             </li>
             <li>
               <MapPin aria-hidden="true" />
-              <span>{business.city} · Entrega a coordinar</span>
+              <span>
+                {business.city} · Gratis en {business.freeDeliveryZone}
+              </span>
             </li>
             <li>
               <MessageCircle aria-hidden="true" />
@@ -80,7 +82,7 @@ export default function Footer() {
 
       <div className="container footer-bottom">
         <p>
-          &copy; {new Date().getFullYear()} QBocados · Precios de referencia en{" "}
+          &copy; {new Date().getFullYear()} QBocados · Precios en{" "}
           {business.currency}
         </p>
         <p>{business.privacyNote}</p>

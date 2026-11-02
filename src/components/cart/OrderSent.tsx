@@ -29,7 +29,7 @@ export default function OrderSent({
       <h3>Tu pedido está listo en WhatsApp</h3>
       <p>
         Revisa el mensaje y pulsa <strong>enviar</strong> en WhatsApp. Te
-        responderemos para confirmar disponibilidad, valor final y entrega.
+        responderemos para confirmar disponibilidad, entrega y forma de pago.
       </p>
 
       <a

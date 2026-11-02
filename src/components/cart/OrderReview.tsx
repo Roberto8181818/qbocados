@@ -50,7 +50,7 @@ export default function OrderReview({
       </ul>
 
       <div className="summary-total">
-        <span>Total de referencia</span>
+        <span>Total de productos</span>
         <strong>{formatPrice(subtotal)}</strong>
       </div>
 

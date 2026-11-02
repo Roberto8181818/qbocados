@@ -28,7 +28,7 @@ const steps = [
   {
     num: "03",
     title: "Confirma por WhatsApp",
-    text: "Enviamos el resumen del pedido y acordamos disponibilidad, valor final y entrega.",
+    text: "Enviamos el resumen del pedido y acordamos disponibilidad, entrega y forma de pago.",
   },
   {
     num: "04",

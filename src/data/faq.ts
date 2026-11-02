@@ -6,8 +6,8 @@ export interface FaqEntry {
 }
 
 /**
- * Respuestas deliberadamente prudentes: no prometen plazos, envíos gratis,
- * conservación exacta ni precios definitivos que el negocio no haya confirmado.
+ * Respuestas deliberadamente prudentes: no prometen plazos ni condiciones
+ * distintas a las confirmadas por el negocio.
  */
 export const faqs: readonly FaqEntry[] = [
   {
@@ -16,19 +16,19 @@ export const faqs: readonly FaqEntry[] = [
   },
   {
     q: "¿Cómo hago un pedido?",
-    a: "Elige tus productos, añádelos a la cesta, completa tus datos y envía el resumen por WhatsApp. Allí confirmamos disponibilidad, presentación, valor final y entrega.",
+    a: "Elige tus productos, añádelos a la cesta, completa tus datos y envía el resumen por WhatsApp. Allí confirmamos disponibilidad, presentación y entrega.",
   },
   {
     q: "¿Los precios son definitivos?",
-    a: `Los precios que ves son de referencia en ${business.currency}. El valor final se confirma por WhatsApp según la presentación y la cantidad que necesites.`,
+    a: `Sí. Los precios del catálogo están en ${business.currency} y son los vigentes. La disponibilidad y la entrega se confirman por WhatsApp antes de preparar el pedido.`,
   },
   {
     q: "¿Cómo se conservan y preparan?",
     a: "Mantén la cadena de frío y sigue las indicaciones de conservación y preparación que acordemos contigo. Si tienes dudas, escríbenos antes de cocinarlas.",
   },
   {
-    q: "¿Hacen entregas y cuánto cuestan?",
-    a: "La entrega se coordina por WhatsApp según tu ubicación. Allí te confirmamos si está disponible, el costo y el horario antes de preparar el pedido.",
+    q: "¿Hacen domicilios y cuánto cuestan?",
+    a: `Hacemos domicilios en ${business.city}. En ${business.freeDeliveryZone} son gratis; para otros sectores coordinamos el costo y el horario por WhatsApp antes de preparar el pedido.`,
   },
   {
     q: "¿Tienen opciones para alergias o restricciones?",

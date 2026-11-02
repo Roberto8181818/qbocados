@@ -140,9 +140,7 @@ export default function MenuSection({ onAdd }: MenuSectionProps) {
                   <div className="product-foot">
                     <div className="price-block">
                       <span className="price">{formatPrice(product.price)}</span>
-                      <span className="price-unit">
-                        {business.currency} · referencia
-                      </span>
+                      <span className="price-unit">{business.currency}</span>
                     </div>
 
                     <div className="product-actions">

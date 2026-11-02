@@ -13,7 +13,7 @@ export interface OrderMessageInput {
 /**
  * Construye el mensaje que se abre en WhatsApp. Incluye productos, cantidades,
  * precios, total y datos de entrega. No afirma que el pedido esté confirmado:
- * deja claro que disponibilidad, valor final y entrega se acuerdan allí.
+ * deja claro que disponibilidad y entrega se acuerdan allí.
  */
 export function buildOrderMessage({
   lines,
@@ -47,11 +47,13 @@ export function buildOrderMessage({
     "",
     ...itemLines,
     "",
-    `Total de referencia: ${formatPrice(total)} ${business.currency}`,
+    `Total de productos: ${formatPrice(total)} ${business.currency}`,
+    "",
+    business.deliveryNote,
     "",
     "Datos de entrega:",
     ...customerLines,
     "",
-    "Entiendo que la disponibilidad, el valor final y la entrega se confirman por WhatsApp antes de preparar el pedido.",
+    "Entiendo que la disponibilidad y la entrega se confirman por WhatsApp antes de preparar el pedido.",
   ].join("\n");
 }

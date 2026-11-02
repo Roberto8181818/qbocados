@@ -2,7 +2,7 @@
 
 Web comercial de una sola página para **QBocados**, pasabocas congeladas artesanales preparadas por encargo. Incluye catálogo en COP, carrito persistente y un checkout que termina en un mensaje de WhatsApp con el pedido completo.
 
-El proyecto no tiene backend: la web arma el pedido, valida los datos y abre WhatsApp. La disponibilidad, el valor final y la entrega se confirman en esa conversación.
+El proyecto no tiene backend: la web arma el pedido, valida los datos y abre WhatsApp. La disponibilidad, la entrega y la forma de pago se confirman en esa conversación.
 
 > **Estado:** listo para desplegar en un hosting estático, pendiente de sustituir los datos de negocio marcados como provisionales (ver [Antes de publicar](#antes-de-publicar)).
 
@@ -40,11 +40,14 @@ La paleta se deriva del logo de la marca (`references/logo.png`) y mantiene el t
 
 El logo real se usa en la cabecera y en el pie. El pie tiene fondo marrón profundo y una placa crema para que el wordmark conserve legibilidad. La marca cuadrada (`logo-mark.png`), los favicons y la imagen social se derivan del logo original.
 
+El hero usa el cartel de la marca (`references/cartel.png`) como arte del panel. Los textos del sello, la etiqueta y el pie se mantienen en HTML para que sean nítidos, escalables y accesibles.
+
 ### Assets de marca
 
 ```text
 public/logo.png               Logo horizontal optimizado (480x150)
 public/logo-mark.png          Marca cuadrada sobre crema (512x512)
+public/hero-cartel.jpg        Cartel del hero optimizado (1000x1066)
 public/favicon.svg            Favicon SVG con PNG embebido
 public/favicon-32.png         Favicon 32x32
 public/favicon-192.png        Icono 192x192
@@ -52,13 +55,13 @@ public/apple-touch-icon.png   Icono 180x180 para iOS
 public/og-image.png           Imagen social 1200x630
 ```
 
-Todos se regeneran desde el logo fuente con:
+Todos se regeneran desde los originales de `references/` con:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/generate-brand-assets.ps1
 ```
 
-El script recorta el logo por transparencia, optimiza el wordmark y elimina del icono cuadrado el punto decorativo que acompaña a la Q. Está escrito en ASCII puro para funcionar igual en Windows PowerShell 5.1 y PowerShell 7.
+El script recorta el logo por transparencia, optimiza el wordmark, elimina del icono cuadrado el punto decorativo que acompaña a la Q y convierte el cartel del hero a JPEG de 1000 px. Está escrito en ASCII puro para funcionar igual en Windows PowerShell 5.1 y PowerShell 7.
 
 ---
 
@@ -93,14 +96,19 @@ index.html                          Metadatos SEO, fuentes, JSON-LD global
 public/
   logo.png                          Logo horizontal optimizado
   logo-mark.png                     Marca cuadrada para iconos
+  hero-cartel.jpg                   Cartel del hero optimizado
   favicon.svg                       Icono vectorial de la marca
   favicon-32.png  favicon-192.png   Iconos PNG de respaldo
   apple-touch-icon.png              Icono 180x180 para iOS
   og-image.png                      Imagen social 1200x630
   robots.txt                        Indexación y sitemap
   sitemap.xml                       Sitemap de la página única
+references/
+  logo.png                          Logo fuente con transparencia
+  cartel.png                        Cartel fuente del hero
+  cartel-completo.png               Versión completa de referencia
 scripts/
-  generate-brand-assets.ps1         Regenera logo, marca, iconos y OG
+  generate-brand-assets.ps1         Regenera logo, marca, cartel, iconos y OG
 src/
   main.tsx                          Punto de entrada
   App.tsx                           Composición, carrito, toast y avisos de desarrollo
@@ -134,16 +142,17 @@ src/
 
 ## Configuración del negocio
 
-`src/config/business.ts` centraliza el nombre, WhatsApp, URL, país, idioma, moneda y los textos comerciales compartidos. Los componentes no repiten estos valores.
+`src/config/business.ts` centraliza el nombre, WhatsApp, URL, ciudad, domicilio, idioma, moneda y los textos comerciales compartidos. Los componentes no repiten estos valores.
 
 ### Datos configurables
 
-| Dato                    | Valor actual              | Estado                                                                          |
-| ----------------------- | ------------------------- | ------------------------------------------------------------------------------- |
-| WhatsApp                | `573044929739`            | Definitivo; se cambia en `src/config/business.ts`                               |
-| Dominio canónico        | `https://qbocados.com`    | Provisional; `src/config/business.ts`, `index.html`, `robots.txt` y `sitemap.xml` |
-| Precios                 | Valores de referencia COP | Pendientes de aprobación; `src/data/products.ts`                                |
-| Fotos de producto       | Ilustraciones SVG         | Campo `image` de cada producto + archivos en `public/`                          |
+| Dato                    | Valor actual                              | Estado                                                                          |
+| ----------------------- | ----------------------------------------- | ------------------------------------------------------------------------------- |
+| WhatsApp                | `573044929739`                            | Definitivo; se cambia en `src/config/business.ts`                               |
+| Dominio canónico        | `https://qbocados.com`                    | Provisional; `src/config/business.ts`, `index.html`, `robots.txt` y `sitemap.xml` |
+| Domicilios              | Barranquilla · Gratis en Alameda del Río  | Confirmado; `business.deliveryNote`                                             |
+| Precios                 | COP confirmados                           | `src/data/products.ts`                                                          |
+| Fotos de producto       | Ilustraciones SVG                         | Campo `image` de cada producto + archivos en `public/`                          |
 
 En desarrollo, la consola avisa si el WhatsApp vuelve al marcador `573000000000` o si la URL sigue siendo `https://qbocados.com`. Esos avisos no se ejecutan en producción.
 
@@ -174,7 +183,7 @@ Para añadir o cambiar un producto, edita solo ese archivo. El carrito ignora id
 
 ### Copiar contenido con criterio
 
-El copy evita testimonios, certificaciones, plazos de entrega, tiempos de conservación, envíos gratis y promesas no verificadas. Los precios se presentan como referencia y la confirmación siempre ocurre por WhatsApp. Mantén ese criterio al editar textos.
+El copy evita testimonios, certificaciones, plazos de entrega, tiempos de conservación y promesas no verificadas. Los precios del catálogo están confirmados y la disponibilidad y la entrega se cierran por WhatsApp. Mantén ese criterio al editar textos.
 
 ---
 
@@ -188,7 +197,7 @@ El copy evita testimonios, certificaciones, plazos de entrega, tiempos de conser
 - El drawer atrapa el foco, cierra con `Escape`, bloquea el scroll del documento y expone `role="dialog"`, `aria-modal` y `aria-labelledby`.
 - Flujo en tres pasos: **Cesta → Datos → Revisión**, seguido del estado **Pedido en WhatsApp**.
 - Campos obligatorios: nombre, teléfono y dirección. Referencias y notas son opcionales. Hay límites de longitud y validación de teléfono.
-- Al revisar, el mensaje incluye productos, cantidades, precio unitario, total de referencia y datos de entrega.
+- Al revisar, el mensaje incluye productos, cantidades, precio unitario, total de productos, cobertura de domicilio y datos de entrega.
 - **La cesta no se vacía al abrir WhatsApp.** Solo se vacía tras la confirmación explícita de “Ya envié mi pedido · Vaciar cesta”.
 - Los datos del formulario no se persisten; se usan para componer el mensaje y se descartan al cerrar.
 
@@ -199,7 +208,7 @@ El copy evita testimonios, certificaciones, plazos de entrega, tiempos de conser
 - `lang="es-CO"`, title y description orientados a la búsqueda local.
 - Canonical, Open Graph y Twitter Card con imagen 1200×630.
 - `theme-color`, favicon SVG, favicons PNG y apple-touch-icon.
-- Preload del logo de cabecera para evitar saltos en la primera carga.
+- Preload del logo de cabecera y del cartel del hero para mejorar la primera carga.
 - JSON-LD `Organization` y `WebSite` en `index.html`.
 - JSON-LD `FAQPage` generado desde `src/data/faq.ts`.
 - `robots.txt` y `sitemap.xml`.
@@ -238,7 +247,7 @@ Estado actual:
 
 - 5 archivos de pruebas, **39 tests** en verde.
 - Typecheck y lint sin errores.
-- Build de producción correcto: ~414 kB de JS (130 kB gzip) y ~35 kB de CSS (7,3 kB gzip).
+- Build de producción correcto: ~413 kB de JS (130 kB gzip) y ~34 kB de CSS (7,0 kB gzip).
 - `npm audit --omit=dev`: 0 vulnerabilidades.
 
 `npm audit` completo reporta avisos moderados de `minimatch` en la cadena de tooling de ESLint. Son dependencias de desarrollo y el fix forzado degradaría `typescript-eslint`; no se aplica.
@@ -255,7 +264,8 @@ Se ejecutó una QA con Chrome headless vía DevTools Protocol (script externo, n
 - revisión de datos y mensaje de WhatsApp
 - persistencia tras abrir WhatsApp y vaciado solo con confirmación
 - contraste del CTA móvil y ausencia de overflow horizontal
-- logo de cabecera y pie cargados, con la paleta aplicada
+- logo de cabecera y pie cargados, cartel del hero visible y paleta aplicada
+- domicilios y precios visibles en hero, catálogo, carrito y pie
 - consola sin errores; solo el aviso esperado del dominio provisional
 
 ---
@@ -270,10 +280,10 @@ Sube el contenido de `dist/` a cualquier hosting estático (Netlify, Vercel, Clo
 
 Checklist mínima:
 
-1. Confirmar el dominio y los precios reales.
+1. Confirmar el dominio definitivo.
 2. Revisar el copy de FAQ y features con el negocio.
 3. Añadir fotos reales si existen y actualizar `image` + `alt`.
-4. Regenerar logo, iconos y OG si cambia el dominio o el mensaje principal.
+4. Regenerar logo, cartel, iconos y OG si cambia el dominio o el mensaje principal.
 5. Probar el enlace de WhatsApp en un teléfono real.
 6. Verificar el sitio en 375, 768, 1024 y 1920 px.
 7. Añadir analítica y aviso de cookies solo si el negocio lo requiere.
@@ -284,12 +294,13 @@ Checklist mínima:
 
 - [ ] Confirmar que el WhatsApp `573044929739` recibe pedidos.
 - [ ] Dominio definitivo en los cuatro puntos indicados.
-- [ ] Lista de precios COP aprobada.
-- [ ] Nombres, presentaciones y disponibilidad del catálogo confirmados.
-- [ ] Condiciones de entrega confirmadas.
+- [x] Lista de precios COP aprobada.
+- [x] Nombres y presentaciones del catálogo confirmados.
+- [x] Domicilios en Barranquilla y gratis en Alameda del Río.
+- [ ] Disponibilidad de cada producto confirmada.
 - [ ] Fotos de producto (opcional; hoy hay ilustraciones SVG).
 - [ ] Revisión legal del texto de privacidad y del tratamiento de datos.
-- [ ] Regenerar `og-image.png` si cambia el dominio.
+- [ ] Regenerar los assets de marca si cambia el dominio.
 - [ ] Prueba del pedido completo desde un dispositivo real.
 
 ---

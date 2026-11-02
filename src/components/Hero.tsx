@@ -3,7 +3,6 @@ import { ArrowRight, MessageCircle } from "lucide-react";
 import { business } from "../config/business";
 import { productNames } from "../data/products";
 import { genericOrderMessage, whatsappLink } from "../lib/whatsapp";
-import ProductIllustration from "./ProductIllustration";
 
 const container: Variants = {
   hidden: {},
@@ -18,32 +17,6 @@ const item: Variants = {
     transition: { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] },
   },
 };
-
-function Doodle({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 120 84" className={className} aria-hidden="true" fill="none">
-      <path
-        d="M12 62 A44 40 0 0 1 104 60 Z"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeDasharray="0.1 5"
-        strokeLinecap="round"
-      />
-      <rect x="18" y="20" width="52" height="15" rx="7" stroke="currentColor" strokeWidth="2" />
-      <path d="M96 26 c6 -8 -4 -12 2 -20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function Sparkle({ className }: { className?: string }) {
-  return (
-    <span className={`star ${className ?? ""}`} aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 0 C13 7 17 11 24 12 C17 13 13 17 12 24 C11 17 7 13 0 12 C7 11 11 7 12 0 Z" />
-      </svg>
-    </span>
-  );
-}
 
 export default function Hero() {
   return (
@@ -83,9 +56,9 @@ export default function Hero() {
             </motion.div>
 
             <motion.ul className="hero-assurances" variants={item} aria-label="Información del pedido">
-              <li>Hecho por encargo</li>
               <li>Precios en {business.currency}</li>
-              <li>Trato directo</li>
+              <li>Domicilios en {business.city}</li>
+              <li>Gratis en {business.freeDeliveryZone}</li>
             </motion.ul>
           </motion.div>
 
@@ -96,36 +69,21 @@ export default function Hero() {
             transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 0.61, 0.36, 1] }}
           >
             <div className="hero-panel">
+              <img
+                className="hero-art"
+                src="/hero-cartel.jpg"
+                alt=""
+                width={1000}
+                height={1066}
+                fetchPriority="high"
+                decoding="async"
+              />
+
               <span className="hero-panel-label">Hecho por encargo</span>
               <span className="hero-seal" aria-hidden="true">
                 <span>QBocados</span>
                 <small>Pasabocas de casa</small>
               </span>
-
-              <Sparkle className="star-1" />
-              <Sparkle className="star-2" />
-              <Sparkle className="star-3" />
-              <Doodle className="doodle doodle-1" />
-              <Doodle className="doodle doodle-2" />
-
-              <div className="hero-platter" aria-hidden="true">
-                <span className="hero-platter-ellipse" />
-                <ProductIllustration
-                  kind="empanada"
-                  plate={false}
-                  className="hero-piece hero-piece-1"
-                />
-                <ProductIllustration
-                  kind="cheese"
-                  plate={false}
-                  className="hero-piece hero-piece-2"
-                />
-                <ProductIllustration
-                  kind="croquette"
-                  plate={false}
-                  className="hero-piece hero-piece-3"
-                />
-              </div>
 
               <p className="hero-caption">
                 <span>01</span>

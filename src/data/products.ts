@@ -1,11 +1,7 @@
 /**
  * Catálogo de QBocados — única fuente de verdad de productos y precios.
  *
- * ⚠️ PRECIOS DE REFERENCIA: los valores en COP son una conversión de la lista
- * demo anterior (EUR) y NO son la lista de precios definitiva. Antes de
- * publicar, reemplázalos y elimina la nota de "precio de referencia" en
- * `src/config/business.ts`.
- *
+ * Precios en COP confirmados por el negocio. Si cambian, actualízalos aquí.
  * No se añaden productos, ingredientes, presentaciones ni disponibilidad que
  * no existieran ya en el negocio.
  */
@@ -24,7 +20,7 @@ export interface Product {
   id: string;
   name: string;
   description: string;
-  /** Precio de referencia en COP. */
+  /** Precio en COP. */
   price: number;
   presentation: string;
   availability: string;

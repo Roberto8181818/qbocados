@@ -2,9 +2,14 @@
  * Configuración central de QBocados.
  *
  * MARCADOR DE POSICIÓN: la URL pública sigue siendo provisional. Antes de
- * publicar, reemplázala por el dominio real. El número de WhatsApp ya es el
- * definitivo y no se muestra como dato provisional.
+ * publicar, reemplázala por el dominio real.
  */
+
+const city = "Barranquilla";
+const currency = "COP";
+const freeDeliveryZone = "Alameda del Río";
+const deliveryNote = `Domicilios en ${city} · Gratis en ${freeDeliveryZone}`;
+
 export const business = {
   name: "QBocados",
   tagline: "Pasabocas congeladas por encargo",
@@ -17,16 +22,16 @@ export const business = {
   /** URL canónica provisional. Reemplazar por el dominio real al desplegar. */
   siteUrl: "https://qbocados.com",
 
-  city: "Barranquilla",
+  city,
   locale: "es-CO",
-  currency: "COP",
+  currency,
+  freeDeliveryZone,
+  deliveryNote,
 
-  /** Copy comercial honesto: sin plazos, envíos gratis ni precios definitivos. */
-  announcement: "Pedidos por encargo · Atención directa por WhatsApp",
-  priceNote:
-    "Precios de referencia en COP. Confirmamos el valor final, la presentación y la entrega por WhatsApp.",
-  orderNote:
-    "La disponibilidad, el valor final y la entrega se confirman por WhatsApp antes de preparar el pedido.",
+  /** Copy comercial honesto: sin plazos ni promesas no confirmadas. */
+  announcement: `Pedidos por encargo · Domicilios en ${city}`,
+  priceNote: `Precios en ${currency} · ${deliveryNote}.`,
+  orderNote: `${deliveryNote}. Confirmamos disponibilidad y entrega por WhatsApp antes de preparar el pedido.`,
   privacyNote:
     "Usamos tus datos únicamente para coordinar este pedido por WhatsApp. No se guardan en esta web.",
 } as const;

@@ -1,4 +1,4 @@
-# Genera los assets de marca a partir de references/logo.png.
+# Genera los assets de marca y el cartel del hero.
 # Uso: powershell -ExecutionPolicy Bypass -File scripts/generate-brand-assets.ps1
 #
 # El script se mantiene en ASCII puro para que Windows PowerShell 5.1 lo
@@ -6,7 +6,8 @@
 # construyen con [char] cuando hacen falta.
 param(
   [string]$OutputDir = (Join-Path $PSScriptRoot "..\public"),
-  [string]$LogoSource = (Join-Path $PSScriptRoot "..\references\logo.png")
+  [string]$LogoSource = (Join-Path $PSScriptRoot "..\references\logo.png"),
+  [string]$CartelSource = (Join-Path $PSScriptRoot "..\references\cartel.png")
 )
 
 $ErrorActionPreference = "Stop"
@@ -253,6 +254,28 @@ $g.FillRectangle($brandBrush, 0, 612, 840, 18)
 
 $og.Save((Join-Path $output "og-image.png"), [System.Drawing.Imaging.ImageFormat]::Png)
 
+# ---------- Cartel del hero ----------
+$cartelPath = [System.IO.Path]::GetFullPath($CartelSource)
+$cartelWidth = 1000
+$cartelHeight = 0
+if (Test-Path $cartelPath) {
+  $cartel = [System.Drawing.Bitmap]::FromFile($cartelPath)
+  $cartelHeight = [int][math]::Round($cartel.Height * $cartelWidth / $cartel.Width)
+  $cartelArt = Resize-Image $cartel $cartelWidth $cartelHeight
+  $jpegCodec = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq "image/jpeg" }
+  $jpegParams = [System.Drawing.Imaging.EncoderParameters]::new(1)
+  $jpegParams.Param[0] = [System.Drawing.Imaging.EncoderParameter]::new(
+    [System.Drawing.Imaging.Encoder]::Quality,
+    [long]90
+  )
+  $cartelArt.Save((Join-Path $output "hero-cartel.jpg"), $jpegCodec, $jpegParams)
+  $jpegParams.Dispose()
+  $cartelArt.Dispose()
+  $cartel.Dispose()
+} else {
+  Write-Warning "No se encontro el cartel del hero: $cartelPath"
+}
+
 # ---------- Limpieza ----------
 $g.Dispose()
 $og.Dispose()
@@ -280,3 +303,4 @@ $source.Dispose()
 Write-Host "Assets generados en $output"
 Write-Host "logo.png: $logoWidth x $logoHeight"
 Write-Host "logo-mark.png: $iconSize x $iconSize"
+Write-Host "hero-cartel.jpg: $cartelWidth x $cartelHeight"

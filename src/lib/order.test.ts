@@ -39,12 +39,13 @@ describe("buildOrderMessage", () => {
 
     expect(message).toContain("• 2 × Producto a — $ 2.000 ($ 1.000 c/u)");
     expect(message).toContain("• 3 × Producto b — $ 7.500 ($ 2.500 c/u)");
-    expect(message).toContain("Total de referencia: $ 9.500 COP");
+    expect(message).toContain("Total de productos: $ 9.500 COP");
   });
 
   it("incluye los datos de entrega y las notas", () => {
     const message = buildOrderMessage({ lines, customer, catalog });
 
+    expect(message).toContain("Domicilios en Barranquilla · Gratis en Alameda del Río");
     expect(message).toContain("Nombre: María Pérez");
     expect(message).toContain("Teléfono: 300 123 4567");
     expect(message).toContain("Dirección: Calle 10 # 20-30, Bogotá");
@@ -67,7 +68,7 @@ describe("buildOrderMessage", () => {
     const message = buildOrderMessage({ lines, customer, catalog });
 
     expect(message).toContain(
-      "la disponibilidad, el valor final y la entrega se confirman por WhatsApp",
+      "la disponibilidad y la entrega se confirman por WhatsApp",
     );
     expect(message.toLowerCase()).not.toContain("pedido confirmado");
   });
