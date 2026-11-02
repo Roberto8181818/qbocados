@@ -15,7 +15,16 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="container footer-grid">
         <div className="footer-brand">
-          <span className="footer-logo">QBocados</span>
+          <span className="footer-logo">
+            <img
+              src="../../public/logo.png"
+              alt={business.name}
+              width={480}
+              height={150}
+              loading="lazy"
+              decoding="async"
+            />
+          </span>
           <p>
             Pasabocas congeladas de casa, preparadas por encargo y pensadas para
             compartir cuando tú quieras.
@@ -53,7 +62,7 @@ export default function Footer() {
             </li>
             <li>
               <MapPin aria-hidden="true" />
-              <span>{business.country} · Entrega a coordinar</span>
+              <span>{business.city} · Entrega a coordinar</span>
             </li>
             <li>
               <MessageCircle aria-hidden="true" />

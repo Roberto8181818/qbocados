@@ -47,12 +47,24 @@ export const productCategories: ReadonlyArray<{
 
 export const products: readonly Product[] = [
   {
-    id: "empanaditas-hawaianas-pollo",
-    name: "Empanaditas Hawaianas de Pollo",
+    id: "empanaditas-pollo",
+    name: "Empanaditas de Pollo",
     description:
-      "Empanaditas rellenas de pollo, piña y salsa hawaiana. Se preparan por encargo.",
-    price: 51000,
-    presentation: "Cantidad a confirmar",
+      "Empanaditas rellenas de pollo con especias. Se preparan por encargo.",
+    price: 15000,
+    presentation: "x16 unidades",
+    availability: "Por encargo",
+    category: "empanadas",
+    kind: "empanada",
+    alt: "Ilustración de empanaditas hawaianas de pollo de QBocados",
+  },
+  {
+    id: "empanaditas-hawaianas",
+    name: "Empanaditas Hawaianas",
+    description:
+      "Empanaditas rellenas de piña, queso y jamón. Se preparan por encargo.",
+    price: 15000,
+    presentation: "x16 unidades",
     availability: "Por encargo",
     category: "empanadas",
     kind: "empanada",
@@ -60,11 +72,11 @@ export const products: readonly Product[] = [
   },
   {
     id: "deditos-queso",
-    name: "Deditos de Queso",
+    name: "Deditos de Queso x24 und",
     description:
       "Deditos rebozados con queso fundente en el interior. Se preparan por encargo.",
-    price: 38000,
-    presentation: "Cantidad a confirmar",
+    price: 15000,
+    presentation: "x24 unidades",
     availability: "Por encargo",
     category: "quesos",
     kind: "cheese",
@@ -72,10 +84,10 @@ export const products: readonly Product[] = [
   },
   {
     id: "deditos-queso-bocadillo",
-    name: "Deditos de Queso con Bocadillo",
+    name: "Deditos de Queso con Bocadillo x24 und",
     description:
       "Deditos de queso con bocadillo para picar y compartir. Se preparan por encargo.",
-    price: 43000,
+    price: 15000,
     presentation: "Cantidad a confirmar",
     availability: "Por encargo",
     category: "quesos",
@@ -83,40 +95,16 @@ export const products: readonly Product[] = [
     alt: "Ilustración de deditos de queso con bocadillo de QBocados",
   },
   {
-    id: "salchurrollos",
-    name: "Salchurrollos",
+    id: "salchirrollos",
+    name: "Salchirrollos x20 und",
     description:
       "Rollos artesanales con salchicha y especias. Se preparan por encargo.",
-    price: 34000,
+    price: 13000,
     presentation: "Cantidad a confirmar",
     availability: "Por encargo",
     category: "aperitivos",
     kind: "roll",
     alt: "Ilustración de salchurrollos artesanales de QBocados",
-  },
-  {
-    id: "alitas-bbq",
-    name: "Alitas BBQ",
-    description:
-      "Alitas marinadas a la barbacoa con especias. Se preparan por encargo.",
-    price: 55000,
-    presentation: "Cantidad a confirmar",
-    availability: "Por encargo",
-    category: "aperitivos",
-    kind: "wings",
-    alt: "Ilustración de alitas BBQ de QBocados",
-  },
-  {
-    id: "croquetas-jamon",
-    name: "Croquetas de Jamón",
-    description:
-      "Croquetas con bechamel artesanal e interior cremoso. Se preparan por encargo.",
-    price: 47000,
-    presentation: "Cantidad a confirmar",
-    availability: "Por encargo",
-    category: "aperitivos",
-    kind: "croquette",
-    alt: "Ilustración de croquetas de jamón de QBocados",
   },
 ];
 

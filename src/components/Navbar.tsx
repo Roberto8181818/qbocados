@@ -80,10 +80,15 @@ export default function Navbar({ cartCount, cartOpen, onOpenCart }: NavbarProps)
 
       <header className={`site-header${scrolled ? " scrolled" : ""}`}>
         <div className="container header-inner">
-          <a href="#inicio" className="logo" aria-label="QBocados · Inicio">
-            <span className="logo-text">
-              QBoca<em>dos</em>
-            </span>
+          <a href="#inicio" className="logo" aria-label={`${business.name} · Inicio`}>
+            <img
+              src="../../public/logo.png"
+              alt=""
+              width={480}
+              height={150}
+              fetchPriority="high"
+              decoding="async"
+            />
           </a>
 
           <nav
@@ -107,7 +112,7 @@ export default function Navbar({ cartCount, cartOpen, onOpenCart }: NavbarProps)
               <li className="nav-mobile-cta">
                 <a
                   href="#menu"
-                  className="btn btn-red btn-sm"
+                  className="btn btn-primary btn-sm"
                   onClick={() => setOpen(false)}
                 >
                   Ver catálogo
@@ -135,7 +140,7 @@ export default function Navbar({ cartCount, cartOpen, onOpenCart }: NavbarProps)
               ) : null}
             </button>
 
-            <a href="#menu" className="btn btn-red btn-sm header-cta">
+            <a href="#menu" className="btn btn-primary btn-sm header-cta">
               Ordenar
             </a>
 

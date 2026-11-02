@@ -33,7 +33,7 @@ export default function OrderSent({
       </p>
 
       <a
-        className="btn btn-red btn-block"
+        className="btn btn-primary btn-block"
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
@@ -57,7 +57,7 @@ export default function OrderSent({
             <button
               ref={confirmButtonRef}
               type="button"
-              className="btn btn-red btn-sm"
+              className="btn btn-primary btn-sm"
               onClick={onClear}
             >
               Sí, vaciar

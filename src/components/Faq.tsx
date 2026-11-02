@@ -55,7 +55,7 @@ export default function Faq() {
             Dudas
           </motion.span>
           <motion.h2 variants={item}>
-            Preguntas <span className="accent">frecuentes</span>
+            Preguntas frecuentes
           </motion.h2>
           <motion.p variants={item}>
             Lo que conviene saber antes de armar tu pedido.

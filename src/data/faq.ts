@@ -12,7 +12,7 @@ export interface FaqEntry {
 export const faqs: readonly FaqEntry[] = [
   {
     q: "¿Qué son las pasabocas de QBocados?",
-    a: "Son aperitivos de casa —empanaditas, deditos de queso, salchurrollos, alitas y croquetas— que se preparan por encargo. Cada pedido se congela para que puedas cocinarlo cuando quieras.",
+    a: "Son aperitivos de casa —empanaditas, deditos de queso y salchirrollos— que se preparan por encargo. Cada pedido se congela para que puedas cocinarlo cuando quieras.",
   },
   {
     q: "¿Cómo hago un pedido?",

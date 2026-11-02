@@ -1,7 +1,7 @@
 /**
  * Configuración central de QBocados.
  *
- * ⚠️ MARCADORES DE POSICIÓN: el número de WhatsApp y la URL pública son
+ * MARCADORES DE POSICIÓN: el número de WhatsApp y la URL pública son
  * provisionales. Antes de publicar, reemplázalos por los datos reales.
  * No se muestran al usuario como si fueran datos confirmados.
  */
@@ -9,15 +9,15 @@ export const business = {
   name: "QBocados",
   tagline: "Pasabocas congeladas por encargo",
   description:
-    "Pasabocas congeladas artesanales preparadas por encargo: empanaditas, deditos de queso, salchurrollos, alitas y croquetas.",
+    "Pasabocas congeladas artesanales preparadas por encargo: empanaditas, deditos de queso, salchrrollos, alitas y croquetas.",
 
   /** Solo dígitos, con indicativo de país. Reemplazar antes de publicar. */
-  whatsappNumber: "573000000000",
+  whatsappNumber: "573044929739",
 
   /** URL canónica provisional. Reemplazar por el dominio real al desplegar. */
   siteUrl: "https://qbocados.com",
 
-  country: "Colombia",
+  city: "Barranquilla",
   locale: "es-CO",
   currency: "COP",
 
@@ -32,5 +32,5 @@ export const business = {
 } as const;
 
 /** Número de ejemplo: la app avisa en desarrollo y el README lo documenta. */
-export const isWhatsAppPlaceholder = business.whatsappNumber === "573000000000";
+export const isWhatsAppPlaceholder = business.whatsappNumber === "573044929739";
 export const isSiteUrlPlaceholder = business.siteUrl === "https://qbocados.com";

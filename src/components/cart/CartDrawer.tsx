@@ -303,7 +303,7 @@ export default function CartDrawer({
                     <ProductIllustration kind="empanada" className="cart-empty-art" />
                     <h3>Tu cesta está vacía</h3>
                     <p>Elige tus pasabocas favoritas y vuelve cuando quieras.</p>
-                    <button type="button" className="btn btn-red" onClick={onGoToMenu}>
+                    <button type="button" className="btn btn-primary" onClick={onGoToMenu}>
                       Ver el catálogo
                     </button>
                   </div>
@@ -364,7 +364,7 @@ export default function CartDrawer({
                 </p>
                 <button
                   type="button"
-                  className="btn btn-red btn-block"
+                  className="btn btn-primary btn-block"
                   onClick={() => setStep("details")}
                 >
                   Continuar con mis datos

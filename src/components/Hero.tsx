@@ -62,12 +62,12 @@ export default function Hero() {
             </motion.h1>
 
             <motion.p className="hero-lead" variants={item}>
-              Empanaditas, deditos de queso, salchurrollos y más. Recetas de casa
+              Empanaditas, deditos, salchirrollos y más. Recetas de casa
               preparadas por encargo y congeladas para que las disfrutes cuando quieras.
             </motion.p>
 
             <motion.div className="hero-cta" variants={item}>
-              <a href="#menu" className="btn btn-red">
+              <a href="#menu" className="btn btn-primary">
                 Armar mi pedido
                 <ArrowRight aria-hidden="true" />
               </a>

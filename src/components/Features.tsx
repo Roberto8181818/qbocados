@@ -62,7 +62,7 @@ export default function Features() {
               Cada pedido se prepara por encargo. Tú eliges qué quieres, nosotros
               lo congelamos y tú decides cuándo ponerlo en la mesa.
             </motion.p>
-            <motion.a href="#menu" className="btn btn-red" variants={item}>
+            <motion.a href="#menu" className="btn btn-primary" variants={item}>
               Ver el catálogo
             </motion.a>
           </motion.div>

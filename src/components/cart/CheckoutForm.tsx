@@ -200,7 +200,7 @@ export default function CheckoutForm({
           <ArrowLeft aria-hidden="true" />
           Volver
         </button>
-        <button type="submit" className="btn btn-red">
+        <button type="submit" className="btn btn-primary">
           Revisar pedido
           <ArrowRight aria-hidden="true" />
         </button>

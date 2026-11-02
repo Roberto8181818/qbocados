@@ -93,7 +93,7 @@ export default function OrderReview({
         {business.orderNote}
       </div>
 
-      <button type="button" className="btn btn-red btn-block" onClick={onSend}>
+      <button type="button" className="btn btn-primary btn-block" onClick={onSend}>
         <MessageCircle aria-hidden="true" />
         Abrir WhatsApp y enviar pedido
       </button>
