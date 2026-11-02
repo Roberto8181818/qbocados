@@ -1,17 +1,17 @@
 /**
  * Configuración central de QBocados.
  *
- * MARCADORES DE POSICIÓN: el número de WhatsApp y la URL pública son
- * provisionales. Antes de publicar, reemplázalos por los datos reales.
- * No se muestran al usuario como si fueran datos confirmados.
+ * MARCADOR DE POSICIÓN: la URL pública sigue siendo provisional. Antes de
+ * publicar, reemplázala por el dominio real. El número de WhatsApp ya es el
+ * definitivo y no se muestra como dato provisional.
  */
 export const business = {
   name: "QBocados",
   tagline: "Pasabocas congeladas por encargo",
   description:
-    "Pasabocas congeladas artesanales preparadas por encargo: empanaditas, deditos de queso, salchrrollos, alitas y croquetas.",
+    "Pasabocas congeladas artesanales preparadas por encargo: empanaditas, deditos de queso y salchirrollos.",
 
-  /** Solo dígitos, con indicativo de país. Reemplazar antes de publicar. */
+  /** Solo dígitos, con indicativo de país. */
   whatsappNumber: "573044929739",
 
   /** URL canónica provisional. Reemplazar por el dominio real al desplegar. */
@@ -31,6 +31,9 @@ export const business = {
     "Usamos tus datos únicamente para coordinar este pedido por WhatsApp. No se guardan en esta web.",
 } as const;
 
-/** Número de ejemplo: la app avisa en desarrollo y el README lo documenta. */
-export const isWhatsAppPlaceholder = business.whatsappNumber === "573044929739";
+/** Marcador de ejemplo: la app avisa en desarrollo si vuelve a ese valor. */
+const whatsappPlaceholder: string = "573000000000";
+
+export const isWhatsAppPlaceholder =
+  business.whatsappNumber === whatsappPlaceholder;
 export const isSiteUrlPlaceholder = business.siteUrl === "https://qbocados.com";

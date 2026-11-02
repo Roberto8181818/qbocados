@@ -22,6 +22,46 @@ Requiere Node.js 20.19+ o 22.12+ (probado con Node 24).
 
 ---
 
+## Identidad visual
+
+La paleta se deriva del logo de la marca (`references/logo.png`) y mantiene el tono editorial y gastronómico.
+
+| Token          | Valor     | Uso principal                                      |
+| -------------- | --------- | -------------------------------------------------- |
+| `--cream`      | `#f7f0e1` | Fondo general y `theme-color`                      |
+| `--cream-soft` | `#fcf7ec` | Placas, tarjetas y logo del pie                    |
+| `--beige`      | `#ece1cc` | Superficies secundarias                            |
+| `--brand`      | `#b0441a` | CTA principal y acentos (5,02:1 sobre crema)       |
+| `--brand-deep` | `#943614` | Acentos pequeños y hover (6,62:1 sobre crema)      |
+| `--gold`       | `#c98a1f` | Detalles decorativos y líneas                      |
+| `--gold-ink`   | `#8a5a18` | Texto dorado accesible sobre fondos claros         |
+| `--ink`        | `#382617` | Texto principal y fondo del pie                    |
+| `--on-brand`   | `#fff8eb` | Texto sobre terracota y marrón                     |
+
+El logo real se usa en la cabecera y en el pie. El pie tiene fondo marrón profundo y una placa crema para que el wordmark conserve legibilidad. La marca cuadrada (`logo-mark.png`), los favicons y la imagen social se derivan del logo original.
+
+### Assets de marca
+
+```text
+public/logo.png               Logo horizontal optimizado (480x150)
+public/logo-mark.png          Marca cuadrada sobre crema (512x512)
+public/favicon.svg            Favicon SVG con PNG embebido
+public/favicon-32.png         Favicon 32x32
+public/favicon-192.png        Icono 192x192
+public/apple-touch-icon.png   Icono 180x180 para iOS
+public/og-image.png           Imagen social 1200x630
+```
+
+Todos se regeneran desde el logo fuente con:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/generate-brand-assets.ps1
+```
+
+El script recorta el logo por transparencia, optimiza el wordmark y elimina del icono cuadrado el punto decorativo que acompaña a la Q. Está escrito en ASCII puro para funcionar igual en Windows PowerShell 5.1 y PowerShell 7.
+
+---
+
 ## Inicio rápido
 
 ```bash
@@ -51,13 +91,16 @@ Servidor de desarrollo en `http://localhost:5173`.
 ```text
 index.html                          Metadatos SEO, fuentes, JSON-LD global
 public/
+  logo.png                          Logo horizontal optimizado
+  logo-mark.png                     Marca cuadrada para iconos
   favicon.svg                       Icono vectorial de la marca
+  favicon-32.png  favicon-192.png   Iconos PNG de respaldo
   apple-touch-icon.png              Icono 180x180 para iOS
   og-image.png                      Imagen social 1200x630
   robots.txt                        Indexación y sitemap
   sitemap.xml                       Sitemap de la página única
 scripts/
-  generate-brand-assets.ps1         Regenera OG e icono con System.Drawing
+  generate-brand-assets.ps1         Regenera logo, marca, iconos y OG
 src/
   main.tsx                          Punto de entrada
   App.tsx                           Composición, carrito, toast y avisos de desarrollo
@@ -93,29 +136,23 @@ src/
 
 `src/config/business.ts` centraliza el nombre, WhatsApp, URL, país, idioma, moneda y los textos comerciales compartidos. Los componentes no repiten estos valores.
 
-### Marcadores de posición
+### Datos configurables
 
-| Dato                    | Valor actual              | Dónde se cambia                                                                 |
+| Dato                    | Valor actual              | Estado                                                                          |
 | ----------------------- | ------------------------- | ------------------------------------------------------------------------------- |
-| WhatsApp                | `573000000000`            | `src/config/business.ts`                                                        |
-| Dominio canónico        | `https://qbocados.com`    | `src/config/business.ts`, `index.html`, `public/robots.txt`, `public/sitemap.xml` |
-| Precios                 | Valores de referencia COP | `src/data/products.ts`                                                          |
+| WhatsApp                | `573044929739`            | Definitivo; se cambia en `src/config/business.ts`                               |
+| Dominio canónico        | `https://qbocados.com`    | Provisional; `src/config/business.ts`, `index.html`, `robots.txt` y `sitemap.xml` |
+| Precios                 | Valores de referencia COP | Pendientes de aprobación; `src/data/products.ts`                                |
 | Fotos de producto       | Ilustraciones SVG         | Campo `image` de cada producto + archivos en `public/`                          |
 
-En desarrollo, la consola avisa si el WhatsApp o la URL siguen siendo marcadores. Esos avisos no se ejecutan en producción.
+En desarrollo, la consola avisa si el WhatsApp vuelve al marcador `573000000000` o si la URL sigue siendo `https://qbocados.com`. Esos avisos no se ejecutan en producción.
 
 Al cambiar el dominio:
 
 1. Actualiza `business.siteUrl`.
 2. Actualiza canonical, Open Graph, Twitter Card y JSON-LD en `index.html`.
 3. Actualiza `public/robots.txt` y `public/sitemap.xml`.
-4. Cambia el dominio dibujado en `scripts/generate-brand-assets.ps1` y regenera la imagen OG.
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/generate-brand-assets.ps1
-```
-
-El script está escrito en ASCII puro para funcionar igual en Windows PowerShell 5.1 y PowerShell 7. Genera `public/og-image.png` (1200×630) y `public/apple-touch-icon.png` (180×180).
+4. Cambia el dominio dibujado en `scripts/generate-brand-assets.ps1` y regenera logo, iconos e imagen OG.
 
 ---
 
@@ -161,7 +198,8 @@ El copy evita testimonios, certificaciones, plazos de entrega, tiempos de conser
 
 - `lang="es-CO"`, title y description orientados a la búsqueda local.
 - Canonical, Open Graph y Twitter Card con imagen 1200×630.
-- `theme-color`, favicon SVG y apple-touch-icon.
+- `theme-color`, favicon SVG, favicons PNG y apple-touch-icon.
+- Preload del logo de cabecera para evitar saltos en la primera carga.
 - JSON-LD `Organization` y `WebSite` en `index.html`.
 - JSON-LD `FAQPage` generado desde `src/data/faq.ts`.
 - `robots.txt` y `sitemap.xml`.
@@ -217,7 +255,8 @@ Se ejecutó una QA con Chrome headless vía DevTools Protocol (script externo, n
 - revisión de datos y mensaje de WhatsApp
 - persistencia tras abrir WhatsApp y vaciado solo con confirmación
 - contraste del CTA móvil y ausencia de overflow horizontal
-- consola sin errores; solo los avisos esperados de placeholders
+- logo de cabecera y pie cargados, con la paleta aplicada
+- consola sin errores; solo el aviso esperado del dominio provisional
 
 ---
 
@@ -231,10 +270,10 @@ Sube el contenido de `dist/` a cualquier hosting estático (Netlify, Vercel, Clo
 
 Checklist mínima:
 
-1. Reemplazar WhatsApp, dominio y precios reales.
+1. Confirmar el dominio y los precios reales.
 2. Revisar el copy de FAQ y features con el negocio.
 3. Añadir fotos reales si existen y actualizar `image` + `alt`.
-4. Regenerar OG si cambia el dominio o el mensaje principal.
+4. Regenerar logo, iconos y OG si cambia el dominio o el mensaje principal.
 5. Probar el enlace de WhatsApp en un teléfono real.
 6. Verificar el sitio en 375, 768, 1024 y 1920 px.
 7. Añadir analítica y aviso de cookies solo si el negocio lo requiere.
@@ -243,10 +282,11 @@ Checklist mínima:
 
 ## Antes de publicar
 
-- [ ] Número de WhatsApp definitivo.
+- [ ] Confirmar que el WhatsApp `573044929739` recibe pedidos.
 - [ ] Dominio definitivo en los cuatro puntos indicados.
 - [ ] Lista de precios COP aprobada.
-- [ ] Presentación, disponibilidad y condiciones de entrega confirmadas.
+- [ ] Nombres, presentaciones y disponibilidad del catálogo confirmados.
+- [ ] Condiciones de entrega confirmadas.
 - [ ] Fotos de producto (opcional; hoy hay ilustraciones SVG).
 - [ ] Revisión legal del texto de privacidad y del tratamiento de datos.
 - [ ] Regenerar `og-image.png` si cambia el dominio.

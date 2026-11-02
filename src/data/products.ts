@@ -56,7 +56,7 @@ export const products: readonly Product[] = [
     availability: "Por encargo",
     category: "empanadas",
     kind: "empanada",
-    alt: "Ilustración de empanaditas hawaianas de pollo de QBocados",
+    alt: "Ilustración de empanaditas de pollo de QBocados",
   },
   {
     id: "empanaditas-hawaianas",
@@ -68,7 +68,7 @@ export const products: readonly Product[] = [
     availability: "Por encargo",
     category: "empanadas",
     kind: "empanada",
-    alt: "Ilustración de empanaditas hawaianas de pollo de QBocados",
+    alt: "Ilustración de empanaditas hawaianas de QBocados",
   },
   {
     id: "deditos-queso",
@@ -88,7 +88,7 @@ export const products: readonly Product[] = [
     description:
       "Deditos de queso con bocadillo para picar y compartir. Se preparan por encargo.",
     price: 15000,
-    presentation: "Cantidad a confirmar",
+    presentation: "x24 unidades",
     availability: "Por encargo",
     category: "quesos",
     kind: "cheese-bocadillo",
@@ -100,11 +100,11 @@ export const products: readonly Product[] = [
     description:
       "Rollos artesanales con salchicha y especias. Se preparan por encargo.",
     price: 13000,
-    presentation: "Cantidad a confirmar",
+    presentation: "x20 unidades",
     availability: "Por encargo",
     category: "aperitivos",
     kind: "roll",
-    alt: "Ilustración de salchurrollos artesanales de QBocados",
+    alt: "Ilustración de salchirrollos artesanales de QBocados",
   },
 ];
 

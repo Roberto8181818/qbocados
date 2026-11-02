@@ -18,8 +18,8 @@
   --muted: #75614b;
 
   /* Acento de marca */
-  --brand: #d6932f;
-  --brand-deep: #b87522;
+  --brand: #b0441a;
+  --brand-deep: #943614;
   --brand-soft: #f2d9c5;
   --gold: #c98a1f;
   --gold-ink: #8a5a18;
@@ -610,7 +610,7 @@ button {
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--brand);
+  color: var(--brand-deep);
 }
 .hero-panel-label::before {
   content: "";
@@ -634,7 +634,7 @@ button {
   justify-content: center;
   gap: 0.2rem;
   text-align: center;
-  color: var(--brand);
+  color: var(--brand-deep);
   transform: rotate(7deg);
   background: rgba(236, 225, 204, 0.35);
 }
