@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ShoppingBag } from "lucide-react";
+import { House, ListOrdered, ShoppingBag, UtensilsCrossed } from "lucide-react";
 import { business } from "../config/business";
 
 const links = [
@@ -159,6 +159,55 @@ export default function Navbar({ cartCount, cartOpen, onOpenCart }: NavbarProps)
           </div>
         </div>
       </header>
+
+      <nav className="mobile-bar" aria-label="Navegación rápida">
+        <a
+          href="#inicio"
+          className={active === "#inicio" ? "is-active" : undefined}
+          aria-current={active === "#inicio" ? "true" : undefined}
+          onClick={() => setOpen(false)}
+        >
+          <House aria-hidden="true" />
+          <span>Inicio</span>
+        </a>
+        <a
+          href="#menu"
+          className={active === "#menu" ? "is-active" : undefined}
+          aria-current={active === "#menu" ? "true" : undefined}
+          onClick={() => setOpen(false)}
+        >
+          <UtensilsCrossed aria-hidden="true" />
+          <span>Catálogo</span>
+        </a>
+        <a
+          href="#como"
+          className={active === "#como" ? "is-active" : undefined}
+          aria-current={active === "#como" ? "true" : undefined}
+          onClick={() => setOpen(false)}
+        >
+          <ListOrdered aria-hidden="true" />
+          <span>Cómo pedir</span>
+        </a>
+        <button
+          type="button"
+          className={`mobile-bar-cart${cartOpen ? " is-active" : ""}`}
+          onClick={onOpenCart}
+          aria-label={cartLabel}
+          aria-haspopup="dialog"
+          aria-controls="cart-drawer"
+          aria-expanded={cartOpen}
+        >
+          <span className="mobile-bar-icon">
+            <ShoppingBag aria-hidden="true" />
+            {cartCount > 0 ? (
+              <span className="mobile-bar-count" aria-hidden="true">
+                {cartCount > 99 ? "99+" : cartCount}
+              </span>
+            ) : null}
+          </span>
+          <span>Cesta</span>
+        </button>
+      </nav>
     </>
   );
 }

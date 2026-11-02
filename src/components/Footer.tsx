@@ -63,7 +63,7 @@ export default function Footer() {
             <li>
               <MapPin aria-hidden="true" />
               <span>
-                {business.city} · Gratis en {business.freeDeliveryZone}
+                {business.city} · Envío gratis en {business.freeDeliveryZone}
               </span>
             </li>
             <li>

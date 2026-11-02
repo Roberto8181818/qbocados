@@ -28,7 +28,7 @@ export const faqs: readonly FaqEntry[] = [
   },
   {
     q: "¿Hacen domicilios y cuánto cuestan?",
-    a: `Hacemos domicilios en ${business.city}. En ${business.freeDeliveryZone} son gratis; para otros sectores coordinamos el costo y el horario por WhatsApp antes de preparar el pedido.`,
+    a: `Hacemos domicilios en ${business.city}. El envío es gratis en ${business.freeDeliveryZone}; para otros sectores coordinamos el costo y el horario por WhatsApp antes de preparar el pedido.`,
   },
   {
     q: "¿Tienen opciones para alergias o restricciones?",

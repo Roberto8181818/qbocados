@@ -58,7 +58,7 @@ export default function Hero() {
             <motion.ul className="hero-assurances" variants={item} aria-label="Información del pedido">
               <li>Precios en {business.currency}</li>
               <li>Domicilios en {business.city}</li>
-              <li>Gratis en {business.freeDeliveryZone}</li>
+              <li>Envío gratis en {business.freeDeliveryZone}</li>
             </motion.ul>
           </motion.div>
 

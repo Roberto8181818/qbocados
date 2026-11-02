@@ -150,7 +150,7 @@ src/
 | ----------------------- | ----------------------------------------- | ------------------------------------------------------------------------------- |
 | WhatsApp                | `573044929739`                            | Definitivo; se cambia en `src/config/business.ts`                               |
 | Dominio canónico        | `https://qbocados.com`                    | Provisional; `src/config/business.ts`, `index.html`, `robots.txt` y `sitemap.xml` |
-| Domicilios              | Barranquilla · Gratis en Alameda del Río  | Confirmado; `business.deliveryNote`                                             |
+| Domicilios              | Barranquilla · Envío gratis en Alameda del Río | Confirmado; `business.deliveryNote`                                        |
 | Precios                 | COP confirmados                           | `src/data/products.ts`                                                          |
 | Fotos de producto       | Ilustraciones SVG                         | Campo `image` de cada producto + archivos en `public/`                          |
 
@@ -224,7 +224,7 @@ Las imágenes sociales y los iconos se generan con `scripts/generate-brand-asset
 - Enlace “Saltar al contenido principal”.
 - Landmarks semánticos (`header`, `nav`, `main`, `footer`) y jerarquía de encabezados.
 - Foco visible en todos los controles y `:focus-visible` consistente.
-- Navegación completa por teclado: menú móvil, filtros, carrito y formulario.
+- Navegación completa por teclado: menú móvil, barra inferior, filtros, carrito y formulario.
 - Focus trap y restauración de foco en el drawer.
 - Etiquetas asociadas, `aria-invalid`, `aria-describedby` y resumen de errores con foco al primer campo inválido.
 - Regiones `aria-live` para feedback del carrito y del toast.
@@ -256,8 +256,8 @@ Estado actual:
 
 Se ejecutó una QA con Chrome headless vía DevTools Protocol (script externo, no incluido en el repositorio) sobre escritorio a 1440 px y móvil a 390 px:
 
-- carga inicial, navegación y menú móvil
-- filtros del catálogo
+- carga inicial, navegación, menú móvil y barra inferior fija
+- filtros del catálogo deslizables en móvil
 - añadir producto, incrementar/decrementar, subtotal y eliminación
 - apertura del drawer, focus trap, `Escape`, bloqueo y restauración del scroll
 - validación del formulario, foco en el primer error y resumen accesible
@@ -296,7 +296,7 @@ Checklist mínima:
 - [ ] Dominio definitivo en los cuatro puntos indicados.
 - [x] Lista de precios COP aprobada.
 - [x] Nombres y presentaciones del catálogo confirmados.
-- [x] Domicilios en Barranquilla y gratis en Alameda del Río.
+- [x] Domicilios en Barranquilla y envío gratis en Alameda del Río.
 - [ ] Disponibilidad de cada producto confirmada.
 - [ ] Fotos de producto (opcional; hoy hay ilustraciones SVG).
 - [ ] Revisión legal del texto de privacidad y del tratamiento de datos.

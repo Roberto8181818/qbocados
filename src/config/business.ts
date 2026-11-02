@@ -8,7 +8,7 @@
 const city = "Barranquilla";
 const currency = "COP";
 const freeDeliveryZone = "Alameda del Río";
-const deliveryNote = `Domicilios en ${city} · Gratis en ${freeDeliveryZone}`;
+const deliveryNote = `Domicilios en ${city} · Envío gratis en ${freeDeliveryZone}`;
 
 export const business = {
   name: "QBocados",

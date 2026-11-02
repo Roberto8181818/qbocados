@@ -45,7 +45,9 @@ describe("buildOrderMessage", () => {
   it("incluye los datos de entrega y las notas", () => {
     const message = buildOrderMessage({ lines, customer, catalog });
 
-    expect(message).toContain("Domicilios en Barranquilla · Gratis en Alameda del Río");
+    expect(message).toContain(
+      "Domicilios en Barranquilla · Envío gratis en Alameda del Río",
+    );
     expect(message).toContain("Nombre: María Pérez");
     expect(message).toContain("Teléfono: 300 123 4567");
     expect(message).toContain("Dirección: Calle 10 # 20-30, Bogotá");
