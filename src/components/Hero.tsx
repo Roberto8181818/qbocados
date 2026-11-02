@@ -1,7 +1,9 @@
 import { motion, type Variants } from "framer-motion";
-import { MessageCircle } from "lucide-react";
-import { genericOrderMessage, whatsappLink } from "../whatsapp";
+import { ArrowRight, MessageCircle } from "lucide-react";
+import { business } from "../config/business";
 import { productNames } from "../data/products";
+import { genericOrderMessage, whatsappLink } from "../lib/whatsapp";
+import ProductIllustration from "./ProductIllustration";
 
 const container: Variants = {
   hidden: {},
@@ -10,38 +12,13 @@ const container: Variants = {
 
 const item: Variants = {
   hidden: { opacity: 0, y: 26 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] },
+  },
 };
 
-/** Empanada ilustrada (media luna con costura repulgada punteada). */
-function Empanada({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 240 130" className={className} aria-hidden="true" fill="none">
-      {/* cuerpo */}
-      <path d="M16 112 A104 96 0 0 1 224 112 Z" fill="currentColor" />
-      {/* costura repulgada */}
-      <path
-        d="M38 104 A84 76 0 0 1 202 104"
-        stroke="#f1e0b8"
-        strokeWidth="5"
-        strokeLinecap="round"
-        strokeDasharray="0.1 11"
-      />
-      {/* base crujiente */}
-      <path d="M16 112 H224" stroke="#8a5a24" strokeWidth="5" strokeLinecap="round" />
-      {/* vapor */}
-      <path
-        d="M104 22 C100 14 108 10 104 2 M124 26 C120 18 128 14 124 6"
-        stroke="#3e3325"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        opacity="0.28"
-      />
-    </svg>
-  );
-}
-
-/** Línea-art decorativa: empanadita y dedito en trazo fino. */
 function Doodle({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 120 84" className={className} aria-hidden="true" fill="none">
@@ -79,56 +56,83 @@ export default function Hero() {
             </motion.span>
 
             <motion.h1 className="hero-title" variants={item}>
-              Del horno de casa,
+              De la cocina de casa,
               <br />
-              a tu congelador
+              <span className="accent">a tu congelador</span>
             </motion.h1>
 
             <motion.p className="hero-lead" variants={item}>
-              Recetas artesanales elaboradas con ingredientes de primera calidad y congeladas
-              al momento. Cocínalas cuando tú quieras y disfruta del verdadero sabor de casa
-              en minutos.
+              Empanaditas, deditos de queso, salchurrollos y más. Recetas de casa
+              preparadas por encargo y congeladas para que las disfrutes cuando quieras.
             </motion.p>
 
             <motion.div className="hero-cta" variants={item}>
+              <a href="#menu" className="btn btn-red">
+                Armar mi pedido
+                <ArrowRight aria-hidden="true" />
+              </a>
               <a
                 href={whatsappLink(genericOrderMessage)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-red"
+                className="btn btn-outline"
               >
                 <MessageCircle aria-hidden="true" />
-                Pedir por WhatsApp
-              </a>
-              <a href="#menu" className="btn btn-outline">
-                Ver el menú
+                Consultar por WhatsApp
               </a>
             </motion.div>
 
-            <motion.a href="#menu" className="hero-pill" variants={item}>
-              <span className="hero-pill-art" aria-hidden="true">
-                <svg viewBox="0 0 64 64" fill="currentColor">
-                  <path d="M8 44 A24 20 0 0 1 56 44 Z" />
-                </svg>
-              </span>
-              Los favoritos de la casa
-            </motion.a>
+            <motion.ul className="hero-assurances" variants={item} aria-label="Información del pedido">
+              <li>Hecho por encargo</li>
+              <li>Precios en {business.currency}</li>
+              <li>Trato directo</li>
+            </motion.ul>
           </motion.div>
 
-          <motion.div className="hero-visual" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 0.61, 0.36, 1] }}>
+          <motion.figure
+            className="hero-visual"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 0.61, 0.36, 1] }}
+          >
             <div className="hero-panel">
+              <span className="hero-panel-label">Hecho por encargo</span>
+              <span className="hero-seal" aria-hidden="true">
+                <span>QBocados</span>
+                <small>Pasabocas de casa</small>
+              </span>
+
               <Sparkle className="star-1" />
               <Sparkle className="star-2" />
               <Sparkle className="star-3" />
               <Doodle className="doodle doodle-1" />
-              <div className="hero-art">
-                <Empanada className="hero-plate" />
+              <Doodle className="doodle doodle-2" />
+
+              <div className="hero-platter" aria-hidden="true">
+                <span className="hero-platter-ellipse" />
+                <ProductIllustration
+                  kind="empanada"
+                  plate={false}
+                  className="hero-piece hero-piece-1"
+                />
+                <ProductIllustration
+                  kind="cheese"
+                  plate={false}
+                  className="hero-piece hero-piece-2"
+                />
+                <ProductIllustration
+                  kind="croquette"
+                  plate={false}
+                  className="hero-piece hero-piece-3"
+                />
               </div>
-              <Empanada className="hero-plate-sm" />
-              <span className="hero-shadow" aria-hidden="true" />
+
+              <p className="hero-caption">
+                <span>01</span>
+                Para picar, compartir y repetir.
+              </p>
             </div>
-            <Doodle className="doodle doodle-2" />
-          </motion.div>
+          </motion.figure>
         </div>
       </section>
 
@@ -137,7 +141,7 @@ export default function Hero() {
           {[0, 1].map((copy) => (
             <div className="marquee-group" key={copy}>
               {productNames.map((name) => (
-                <span className="marquee-item" key={name + copy}>
+                <span className="marquee-item" key={`${name}-${copy}`}>
                   {name}
                   <span className="marquee-dot">·</span>
                 </span>
@@ -149,11 +153,11 @@ export default function Hero() {
 
       <section className="trust" aria-label="Sellos de la casa">
         <div className="container trust-row">
-          <p>Mucho más que un congelador: un auténtico punto de sabor</p>
+          <p>Un congelador lleno de planes</p>
           <div className="trust-badges">
-            <span>Ingredientes premium</span>
             <span>Elaboración artesanal</span>
-            <span>Envío express</span>
+            <span>Pedidos por encargo</span>
+            <span>Atención por WhatsApp</span>
           </div>
         </div>
       </section>

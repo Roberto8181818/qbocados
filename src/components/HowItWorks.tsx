@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 const container: Variants = {
   hidden: {},
@@ -8,14 +7,34 @@ const container: Variants = {
 
 const item: Variants = {
   hidden: { opacity: 0, y: 26 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] },
+  },
 };
 
 const steps = [
-  { num: "01", title: "Elige tus favoritas", text: "Selecciona las pasabocas que más te gusten del catálogo." },
-  { num: "02", title: "Añádelas a tu cesta", text: "Arma tu pedido y finalízalo por WhatsApp en un par de toques." },
-  { num: "03", title: "Preparamos tu pedido", text: "Se elaboran al momento y se congelan el mismo día para conservar su frescura." },
-  { num: "04", title: "Disfruta en casa", text: "Recíbelas congeladas y tenlas listas en minutos. Sin complicaciones." },
+  {
+    num: "01",
+    title: "Elige tus favoritas",
+    text: "Explora el catálogo y filtra por categoría para encontrar lo que buscas.",
+  },
+  {
+    num: "02",
+    title: "Arma tu cesta",
+    text: "Ajusta cantidades, revisa el total y deja tus datos de entrega.",
+  },
+  {
+    num: "03",
+    title: "Confirma por WhatsApp",
+    text: "Enviamos el resumen del pedido y acordamos disponibilidad, valor final y entrega.",
+  },
+  {
+    num: "04",
+    title: "Disfruta cuando quieras",
+    text: "Conserva tus pasabocas congeladas y prepáralas siguiendo las indicaciones acordadas.",
+  },
 ];
 
 export default function HowItWorks() {
@@ -30,9 +49,13 @@ export default function HowItWorks() {
           variants={container}
         >
           <motion.span className="eyebrow" variants={item}>
-            Cómo trabajamos
+            Cómo pedir
           </motion.span>
-          <motion.h2 variants={item}>De la receta al plato, en 4 pasos</motion.h2>
+          <motion.h2 variants={item}>De la cesta a tu mesa, en cuatro pasos</motion.h2>
+          <motion.p variants={item}>
+            Sin formularios interminables ni promesas de entrega que no podamos
+            cumplir: todo se confirma contigo por WhatsApp.
+          </motion.p>
         </motion.div>
 
         <motion.ol
@@ -42,11 +65,11 @@ export default function HowItWorks() {
           viewport={{ once: true, margin: "-40px" }}
           variants={container}
         >
-          {steps.map((s) => (
-            <motion.li key={s.num} className="step" variants={item}>
-              <span className="step-num">{s.num}</span>
-              <h3>{s.title}</h3>
-              <p>{s.text}</p>
+          {steps.map((step) => (
+            <motion.li key={step.num} className="step" variants={item}>
+              <span className="step-num">{step.num}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
             </motion.li>
           ))}
         </motion.ol>

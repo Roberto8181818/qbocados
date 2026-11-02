@@ -1,27 +1,26 @@
-import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
-import { ShieldCheck, Snowflake, UtensilsCrossed, Truck } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
+import { Home, MessageCircle, Snowflake, UtensilsCrossed } from "lucide-react";
 
 const features = [
   {
-    icon: ShieldCheck,
-    title: "Ingredientes premium",
-    text: "Seleccionamos los mejores ingredientes de proveedores locales y artesanos de la zona.",
+    icon: UtensilsCrossed,
+    title: "Elaboración artesanal",
+    text: "Recetas de casa preparadas por encargo.",
   },
   {
     icon: Snowflake,
-    title: "Congelación express",
-    text: "Congelamos al momento para conservar aroma y textura originales durante meses.",
+    title: "Congeladas para después",
+    text: "Congelamos cada pedido para que lo tengas a mano y lo cocines cuando quieras.",
   },
   {
-    icon: UtensilsCrossed,
-    title: "Elaboración artesanal",
-    text: "Recetas tradicionales con el toque propio y casero que solo se enseña en casa.",
+    icon: MessageCircle,
+    title: "Trato directo",
+    text: "Confirmas disponibilidad, presentación y entrega por WhatsApp.",
   },
   {
-    icon: Truck,
-    title: "Envío express",
-    text: "Entregas en 24-48 h en toda la ciudad, con pedido preparado al momento.",
+    icon: Home,
+    title: "A tu ritmo",
+    text: "Te indicamos cómo conservar y preparar cada producto cuando lo vayas a disfrutar.",
   },
 ];
 
@@ -32,7 +31,11 @@ const container: Variants = {
 
 const item: Variants = {
   hidden: { opacity: 0, y: 26 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] },
+  },
 };
 
 export default function Features() {
@@ -50,17 +53,17 @@ export default function Features() {
             <motion.span className="eyebrow" variants={item}>
               Por qué QBocados
             </motion.span>
-            <motion.h2 className="hero-title" variants={item}>
+            <motion.h2 className="story-title" variants={item}>
               Lo casero,
               <br />
-              hecho como se debe
+              con calma
             </motion.h2>
             <motion.p className="hero-lead" variants={item}>
-              No vendemos simples congelados: conservamos la calidad de una cocina casera
-              en tu nevera.
+              Cada pedido se prepara por encargo. Tú eliges qué quieres, nosotros
+              lo congelamos y tú decides cuándo ponerlo en la mesa.
             </motion.p>
             <motion.a href="#menu" className="btn btn-red" variants={item}>
-              Conocer el menú
+              Ver el catálogo
             </motion.a>
           </motion.div>
 
@@ -71,12 +74,12 @@ export default function Features() {
             viewport={{ once: true, margin: "-40px" }}
             variants={container}
           >
-            {features.map((f) => (
-              <motion.div className="story-item" key={f.title} variants={item}>
-                <f.icon aria-hidden="true" strokeWidth={1.5} />
+            {features.map((feature) => (
+              <motion.div className="story-item" key={feature.title} variants={item}>
+                <feature.icon aria-hidden="true" strokeWidth={1.5} />
                 <div>
-                  <h3>{f.title}</h3>
-                  <p>{f.text}</p>
+                  <h3>{feature.title}</h3>
+                  <p>{feature.text}</p>
                 </div>
               </motion.div>
             ))}

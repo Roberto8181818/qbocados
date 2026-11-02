@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
+import { ShoppingBag } from "lucide-react";
+import { business } from "../config/business";
 
 const links = [
   { href: "#inicio", label: "Inicio" },
-  { href: "#menu", label: "Menú" },
-  { href: "#porque", label: "Por qué QBocados" },
-  { href: "#como", label: "Cómo trabajamos" },
-  { href: "#opiniones", label: "Opiniones" },
-  { href: "#faq", label: "FAQ" },
+  { href: "#menu", label: "Catálogo" },
+  { href: "#porque", label: "Nosotros" },
+  { href: "#como", label: "Cómo pedir" },
+  { href: "#faq", label: "Preguntas" },
 ];
 
-export default function Navbar() {
+interface NavbarProps {
+  cartCount: number;
+  cartOpen: boolean;
+  onOpenCart: () => void;
+}
+
+export default function Navbar({ cartCount, cartOpen, onOpenCart }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("#inicio");
@@ -23,30 +30,52 @@ export default function Navbar() {
 
   // Scroll-spy: marca como activa la sección visible en la navegación.
   useEffect(() => {
-    const ids = links.map((l) => l.href.slice(1));
+    const ids = links.map((link) => link.href.slice(1));
     const sections = ids
       .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
+      .filter((element): element is HTMLElement => element !== null);
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActive(`#${entry.target.id}`);
-          }
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
         }
       },
-      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
     );
 
-    sections.forEach((s) => observer.observe(s));
+    sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    const desktop = window.matchMedia("(min-width: 961px)");
+    const onBreakpoint = () => {
+      if (desktop.matches) setOpen(false);
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    desktop.addEventListener("change", onBreakpoint);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      desktop.removeEventListener("change", onBreakpoint);
+    };
+  }, [open]);
+
+  const cartLabel =
+    cartCount > 0
+      ? `Abrir cesta, ${cartCount} ${cartCount === 1 ? "producto" : "productos"}`
+      : "Abrir cesta vacía";
 
   return (
     <>
       <div className="announce">
-        <p>Envío gratis a domicilio en pedidos desde 35&nbsp;€ · Pedidos antes de las 14:00, entregamos el mismo día</p>
+        <p>{business.announcement}</p>
       </div>
 
       <header className={`site-header${scrolled ? " scrolled" : ""}`}>
@@ -63,32 +92,60 @@ export default function Navbar() {
             aria-label="Navegación principal"
           >
             <ul>
-              {links.map((l) => (
-                <li key={l.href}>
+              {links.map((link) => (
+                <li key={link.href}>
                   <a
-                    href={l.href}
-                    className={active === l.href ? "active" : undefined}
-                    aria-current={active === l.href ? "true" : undefined}
+                    href={link.href}
+                    className={active === link.href ? "active" : undefined}
+                    aria-current={active === link.href ? "true" : undefined}
                     onClick={() => setOpen(false)}
                   >
-                    {l.label}
+                    {link.label}
                   </a>
                 </li>
               ))}
+              <li className="nav-mobile-cta">
+                <a
+                  href="#menu"
+                  className="btn btn-red btn-sm"
+                  onClick={() => setOpen(false)}
+                >
+                  Ver catálogo
+                </a>
+              </li>
             </ul>
           </nav>
 
           <div className="header-actions">
-            <a href="#pedido" className="btn btn-red btn-sm header-cta">
-              Ordenar ahora
+            <button
+              type="button"
+              className="header-cart"
+              onClick={onOpenCart}
+              aria-label={cartLabel}
+              aria-haspopup="dialog"
+              aria-controls="cart-drawer"
+              aria-expanded={cartOpen}
+            >
+              <ShoppingBag aria-hidden="true" />
+              <span className="header-cart-label">Cesta</span>
+              {cartCount > 0 ? (
+                <span className="header-cart-count" aria-hidden="true">
+                  {cartCount > 99 ? "99+" : cartCount}
+                </span>
+              ) : null}
+            </button>
+
+            <a href="#menu" className="btn btn-red btn-sm header-cta">
+              Ordenar
             </a>
+
             <button
               type="button"
               className={`nav-toggle${open ? " open" : ""}`}
-              onClick={() => setOpen((o) => !o)}
+              onClick={() => setOpen((current) => !current)}
               aria-expanded={open}
               aria-controls="mainNav"
-              aria-label="Abrir menú de navegación"
+              aria-label={open ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
             >
               <span />
               <span />
